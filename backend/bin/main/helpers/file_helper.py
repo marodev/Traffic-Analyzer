@@ -1,3 +1,5 @@
+import json
+import pickle
 from csv import DictReader
 from os import remove, walk
 from shutil import move
@@ -53,3 +55,13 @@ def is_normal_csv_file(file):
 def is_enriched_csv_file(file):
     file = str(file).lower()
     return file.startswith("capture-") and file.endswith("-enriched.csv")
+
+
+def read_dict_file(file):
+    with open(file, "rb") as dict_file:
+        return pickle.load(dict_file)
+        
+
+def write_dict_file(file, dictionary):
+    with open(file, "wb") as dict_file:
+        pickle.dump(dictionary, dict_file, )

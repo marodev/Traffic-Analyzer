@@ -53,8 +53,14 @@ def main():
 def run(environment_variables, print_enrichers=False):
     csv_tmp_path = environment_variables["csv_tmp_path"]
     csv_capture_path = environment_variables["csv_capture_path"]
+    pickle_dict_file_path = environment_variables["pickle_dict_file_path"]
+
     limiter = TrafficLimitHelper(3, 1)
     enrichment_classes = Enricher(limiter)
+    stream_enricher = enrichment_classes.enrichers["stream_enricher"]
+
+    if path.isfile(pickle_dict_file_path):
+        stream_enricher.stream_ids = file_helper.read_dict_file(pickle_dict_file_path)
 
     for file_path in file_helper.get_file_paths(csv_tmp_path, file_helper.is_normal_csv_file):
         new_file = re.sub(".csv$", "-enriched.csv", str(file_path["filename"]))
@@ -69,6 +75,10 @@ def run(environment_variables, print_enrichers=False):
             path.join(file_path["path"], file_path["filename"]),
             path.join(csv_capture_path, file_path["filename"])
         )
+
+    file_helper.write_dict_file(pickle_dict_file_path, stream_enricher.stream_ids)
+    if path.isfile(pickle_dict_file_path):
+        stream_enricher.stream_ids = file_helper.read_dict_file(pickle_dict_file_path)
 
 
 if __name__ == "__main__":
