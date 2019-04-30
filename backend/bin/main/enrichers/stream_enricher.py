@@ -6,7 +6,7 @@ from main.helpers.print_helper import PrintHelper
 class StreamEnricher:
     def __init__(self):
         self.stream_ids = {"": ""}
-        self.header = "traffic_analyzer_tcp_stream"
+        self.header = "stream_identifier"
 
     def print(self):
         print_text = "Print out for {} tcp stream entries"
