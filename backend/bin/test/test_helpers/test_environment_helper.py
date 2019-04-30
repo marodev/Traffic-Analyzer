@@ -21,14 +21,16 @@ class TestEnrivonmentHelperMethods(unittest.TestCase):
             "pcap_processed_path": path.join("..", "..", "..", "docker", "init_files", "pcaps"),
             "csv_tmp_path": path.join("..", "files"),
             "csv_list_path": path.join("..", "files"),
-            "csv_capture_path": path.join("..", "files")
+            "csv_capture_path": path.join("..", "files"),
+            "pickle_dict_file_path": path.join("..", "files", "stream.pickle")
         }
         cls.production_variables = {
             "pcap_path": path.join("/tmp", "pcaps"),
             "pcap_processed_path": path.join("/tmp", "pcaps_processed"),
             "csv_tmp_path": path.join("/tmp", "csvs"),
             "csv_list_path": path.join("/opt", "splunk", "etc", "apps", "traffic-analyzer", "lookups", "lists"),
-            "csv_capture_path": path.join("/opt", "splunk", "etc", "apps", "traffic-analyzer", "lookups", "captures")
+            "csv_capture_path": path.join("/opt", "splunk", "etc", "apps", "traffic-analyzer", "lookups", "captures"),
+            "pickle_dict_file_path": path.join("/tmp", "csvs", "stream.pickle")
         }
 
     @patch("psutil.process_iter")
